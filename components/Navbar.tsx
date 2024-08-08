@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link href="/" className="text-gray-300 hover:text-white transition duration-300">
             Inicio
           </Link>
-          <Link href="/recursos" className="text-gray-300 hover:text-white transition duration-300">
+          <Link href="/combat-simulator" className="text-gray-300 hover:text-white transition duration-300">
             Recursos
           </Link>
           <Link href="/mines" className="text-gray-300 hover:text-white transition duration-300">
