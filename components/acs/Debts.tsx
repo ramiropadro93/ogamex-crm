@@ -1,15 +1,7 @@
 import React from 'react';
 
 interface DebtsProps {
-  recursosRobados: {
-    metal: number[];
-    cristal: number[];
-    deuterio: number[];
-  };
-  escombrosReciclados: {
-    metal: number[];
-    cristal: number[];
-  };
+  nombresJugadores: string[];
   rentaJugadores: {
     metal: number[];
     cristal: number[];
@@ -23,8 +15,7 @@ interface DebtsProps {
 }
 
 const Debts: React.FC<DebtsProps> = ({
-  recursosRobados,
-  escombrosReciclados,
+  nombresJugadores,
   rentaJugadores,
   rentaNetaPromedio,
 }) => {
@@ -39,36 +30,60 @@ const Debts: React.FC<DebtsProps> = ({
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
             <tr>
-              <th className="border border-gray-300 p-2 w-1/3">Jugador</th>
-              <th className="border border-gray-300 p-2 w-1/3">Metal</th>
-              <th className="border border-gray-300 p-2 w-1/3">Cristal</th>
-              <th className="border border-gray-300 p-2 w-1/3">Deuterio</th>
+              <th className="border border-gray-300 p-2">Jugador</th>
+              <th className="border border-gray-300 p-2">Metal</th>
+              <th className="border border-gray-300 p-2">Cristal</th>
+              <th className="border border-gray-300 p-2">Deuterio</th>
             </tr>
           </thead>
           <tbody>
-            {rentaJugadores.metal.map((_, index) => (
+            {nombresJugadores.map((nombre, index) => (
               <tr key={index}>
-                <td className="border border-gray-300 p-2">Jugador {index + 1}</td>
+                <td className="border border-gray-300 p-2">{nombre}</td>
                 <td
-                  className={`border border-gray-300 p-2 ${
-                    calcularDeuda(rentaJugadores.metal[index], rentaNetaPromedio.metal) >= 0 ? 'text-green-600' : 'text-red-600'
+                  className={`border border-gray-300 p-2 font-bold ${
+                    calcularDeuda(
+                      rentaJugadores.metal[index],
+                      rentaNetaPromedio.metal
+                    ) >= 0
+                      ? 'text-green-600'
+                      : 'text-red-600'
                   }`}
                 >
-                  {calcularDeuda(rentaJugadores.metal[index], rentaNetaPromedio.metal).toLocaleString()}
+                  {calcularDeuda(
+                    rentaJugadores.metal[index],
+                    rentaNetaPromedio.metal
+                  ).toLocaleString()}
                 </td>
                 <td
-                  className={`border border-gray-300 p-2 ${
-                    calcularDeuda(rentaJugadores.cristal[index], rentaNetaPromedio.cristal) >= 0 ? 'text-green-600' : 'text-red-600'
+                  className={`border border-gray-300 p-2 font-bold ${
+                    calcularDeuda(
+                      rentaJugadores.cristal[index],
+                      rentaNetaPromedio.cristal
+                    ) >= 0
+                      ? 'text-green-600'
+                      : 'text-red-600'
                   }`}
                 >
-                  {calcularDeuda(rentaJugadores.cristal[index], rentaNetaPromedio.cristal).toLocaleString()}
+                  {calcularDeuda(
+                    rentaJugadores.cristal[index],
+                    rentaNetaPromedio.cristal
+                  ).toLocaleString()}
                 </td>
                 <td
-                  className={`border border-gray-300 p-2 ${
-                    calcularDeuda(rentaJugadores.deuterio[index], rentaNetaPromedio.deuterio) >= 0 ? 'text-green-600' : 'text-red-600'
+                  className={`border border-gray-300 p-2 font-bold ${
+                    calcularDeuda(
+                      rentaJugadores.deuterio[index],
+                      rentaNetaPromedio.deuterio
+                    ) >= 0
+                      ? 'text-green-600'
+                      : 'text-red-600'
                   }`}
                 >
-                  {calcularDeuda(rentaJugadores.deuterio[index], rentaNetaPromedio.deuterio).toLocaleString()}
+                  {calcularDeuda(
+                    rentaJugadores.deuterio[index],
+                    rentaNetaPromedio.deuterio
+                  ).toLocaleString()}
                 </td>
               </tr>
             ))}

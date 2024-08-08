@@ -1,3 +1,5 @@
+import Debts from "./Debts";
+
 interface FinalProfitProps {
   nombresJugadores: string[];
   recursosRobados: { [key: string]: number[] };
@@ -114,6 +116,16 @@ const FinalProfit = ({
           </tbody>
         </table>
       </div>
+      
+      <Debts
+        rentaJugadores={{
+          metal: nombresJugadores.map((_, index) => calcularRenta(index).metal),
+          cristal: nombresJugadores.map((_, index) => calcularRenta(index).cristal),
+          deuterio: nombresJugadores.map((_, index) => calcularRenta(index).deuterio),
+        }}
+        rentaNetaPromedio={rentaNetaPromedio}
+        nombresJugadores={nombresJugadores}
+      />
     </>
   );
 };
