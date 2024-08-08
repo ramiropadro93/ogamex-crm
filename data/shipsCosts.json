@@ -1,0 +1,86 @@
+[
+  {
+    "tipo": "CAZADOR LIGERO",
+    "metal": 3000,
+    "cristal": 1000,
+    "deuterio": 0
+  },
+  {
+    "tipo": "PESADO",
+    "metal": 6000,
+    "cristal": 4000,
+    "deuterio": 0
+  },
+  {
+    "tipo": "CRUCERO",
+    "metal": 20000,
+    "cristal": 7000,
+    "deuterio": 2000
+  },
+  {
+    "tipo": "NAVE DE BATALLA",
+    "metal": 45000,
+    "cristal": 15000,
+    "deuterio": 0
+  },
+  {
+    "tipo": "ACORAZADO",
+    "metal": 36000,
+    "cristal": 48000,
+    "deuterio": 9000
+  },
+  {
+    "tipo": "BOMBARDERO",
+    "metal": 50000,
+    "cristal": 25000,
+    "deuterio": 15000
+  },
+  {
+    "tipo": "DESTRUCTOR",
+    "metal": 72000,
+    "cristal": 56000,
+    "deuterio": 8000
+  },
+  {
+    "tipo": "SEGADOR",
+    "metal": 100000,
+    "cristal": 65000,
+    "deuterio": 10000
+  },
+  {
+    "tipo": "GALEON",
+    "metal": 380000,
+    "cristal": 280000,
+    "deuterio": 20000
+  },
+  {
+    "tipo": "EDLM",
+    "metal": 5000000,
+    "cristal": 4000000,
+    "deuterio": 1000000
+  },
+  {
+    "tipo": "HALCON",
+    "metal": 7200000,
+    "cristal": 3600000,
+    "deuterio": 800000
+  },
+  {
+    "tipo": "AVATAR",
+    "metal": 32800000,
+    "cristal": 18000000,
+    "deuterio": 2000000
+  },
+  {
+    "tipo": "NPC",
+    "metal": 2000,
+    "cristal": 2000,
+    "deuterio": 0
+  },
+  {
+    "tipo": "NGC",
+    "metal": 6000,
+    "cristal": 6000,
+    "deuterio": 0
+  }
+]
