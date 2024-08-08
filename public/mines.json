@@ -1,0 +1,257 @@
+{
+	"planets": [
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 309,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 157,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 243,
+			"position": 6,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 254,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 255,
+			"position": 10,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 258,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 259,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 260,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 261,
+			"position": 4,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 261,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 262,
+			"position": 6,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 262,
+			"position": 7,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 2,
+			"system": 262,
+			"position": 9,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		},
+		{
+			"galaxy": 1,
+			"system": 221,
+			"position": 5,
+			"metal": 58,
+			"crystal": 54,
+			"deuterium": 50,
+			"temperature": 0,
+			"fields": 0,
+			"moon": 1
+		}
+	]
+}
