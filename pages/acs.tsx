@@ -7,7 +7,6 @@ import Plunder from '@/components/acs/Plunder';
 import Debris from '@/components/acs/Debris';
 import PartialProfit from '@/components/acs/PartialProfit';
 import FinalProfit from '@/components/acs/FinalProfit';
-import Debts from '@/components/acs/Debts';
 
 const Acs = () => {
   const [numeroJugadores, setNumeroJugadores] = useState<number>(2);
@@ -47,6 +46,8 @@ const Acs = () => {
     const loadShipsCosts = async () => {
       const costs = await import('../data/shipsCosts.json');
       setShipsCosts(costs.default);
+
+      // Actualizar el estado cantidad con la nueva estructura
       setCantidad(
         costs.default.reduce((acc: any, ship: any) => {
           acc[ship.tipo] = Array(numeroJugadores).fill(0);
@@ -63,6 +64,7 @@ const Acs = () => {
     const num = parseInt(event.target.value, 10);
     setNumeroJugadores(num);
     setNombresJugadores(Array(num).fill(''));
+
     setCantidad(
       shipsCosts.reduce((acc, ship) => {
         acc[ship.tipo] = Array(num).fill(0);
@@ -79,7 +81,6 @@ const Acs = () => {
     setEscombrosReciclados({
       metal: Array(num).fill(0),
       cristal: Array(num).fill(0),
-      deuterio: Array(num).fill(0),
     });
   };
 
