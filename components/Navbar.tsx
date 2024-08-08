@@ -16,7 +16,7 @@ const Navbar = () => {
             Inicio
           </Link>
           <Link href="/combat-simulator" className="text-gray-300 hover:text-white transition duration-300">
-            Recursos
+            Simulador de batallas
           </Link>
           <Link href="/mines" className="text-gray-300 hover:text-white transition duration-300">
             Minas

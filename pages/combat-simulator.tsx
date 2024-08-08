@@ -1,8 +1,18 @@
 import { useState } from 'react';
 import { NextPage } from 'next';
-import parse from 'html-react-parser';
+import parse, {
+  domToReact,
+  Element,
+  HTMLReactParserOptions,
+} from 'html-react-parser';
 
-const CombatSimulator: NextPage = () => {
+// Función de transformación para modificar el HTML
+const transformHtml = (node: Element, index: number) => {
+  if ((node.type as any) == 'img') return null;
+  return node;
+};
+
+const BattleIncome: NextPage = () => {
   const [htmlInput, setHtmlInput] = useState<string>('');
   const [parsedData, setParsedData] = useState<any>(null);
 
@@ -11,18 +21,19 @@ const CombatSimulator: NextPage = () => {
   };
 
   const parseHtml = () => {
-    // Aquí puedes utilizar la lógica necesaria para extraer datos del HTML
-    // Ejemplo con html-react-parser:
-    const parsed = parse(htmlInput);
+    // Parsear HTML y aplicar transformaciones
+    const parsed = parse(htmlInput, {
+      transform: transformHtml as any,
+    });
 
-    // Aquí se debería implementar la lógica para procesar el HTML parseado
-    // y extraer los datos necesarios. Este ejemplo solo muestra el HTML parseado
     setParsedData(parsed);
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Calculadora de Renta de Batalla</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        Calculadora de Renta de Batalla
+      </h1>
       <textarea
         value={htmlInput}
         onChange={handleHtmlChange}
@@ -44,4 +55,4 @@ const CombatSimulator: NextPage = () => {
   );
 };
 
-export default CombatSimulator;
+export default BattleIncome;
