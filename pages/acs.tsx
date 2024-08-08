@@ -48,7 +48,7 @@ const Acs = () => {
         ))}
       </div>
 
-      <h2 className="text-xl font-bold mb-4">Pérdidas</h2>
+      <h2 className="text-2xl font-bold mb-4">Pérdidas</h2>
       <div>
         {nombresJugadores.map((nombre, index) => (
           <div key={index} className="mb-4">
