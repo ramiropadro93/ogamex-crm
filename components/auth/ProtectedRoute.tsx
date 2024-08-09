@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   const router = useRouter();
 
   if (!password || password == '') {
-    router.push('/login');
+    router.push('/');
     return null;
   }
 
