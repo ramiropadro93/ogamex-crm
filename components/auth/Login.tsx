@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 
     if (inputPassword === correctPassword) {
       setPassword(inputPassword);
-      router.push('/');
+      router.push('/mines');
     } else {
       alert('Contraseña incorrecta');
       router.push('https://www.google.com'); // Redirige a Google en caso de contraseña incorrecta

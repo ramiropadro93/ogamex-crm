@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   
 	useEffect(() => {
 	  if (!password || password === '') {
-		router.push('/'); // Redirige al login si no hay contraseña
+		router.push('/login'); // Redirige al login si no hay contraseña
 	  } else {
 		setLoading(false); // Permite que el contenido se muestre si la contraseña es correcta
 	  }
