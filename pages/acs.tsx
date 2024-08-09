@@ -7,6 +7,7 @@ import Plunder from '@/components/acs/Plunder';
 import Debris from '@/components/acs/Debris';
 import PartialProfit from '@/components/acs/PartialProfit';
 import FinalProfit from '@/components/acs/FinalProfit';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 const Acs = () => {
   const [numeroJugadores, setNumeroJugadores] = useState<number>(2);
@@ -85,55 +86,59 @@ const Acs = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Calculadora de Repartidor SAC</h1>
+    <ProtectedRoute>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">
+          Calculadora de Repartidor SAC
+        </h1>
 
-      <PlayerSelect
-        numeroJugadores={numeroJugadores}
-        handleNumeroJugadoresChange={handleNumeroJugadoresChange}
-        nombresJugadores={nombresJugadores}
-        setNombresJugadores={setNombresJugadores}
-      />
+        <PlayerSelect
+          numeroJugadores={numeroJugadores}
+          handleNumeroJugadoresChange={handleNumeroJugadoresChange}
+          nombresJugadores={nombresJugadores}
+          setNombresJugadores={setNombresJugadores}
+        />
 
-      {nombresJugadores.length > 0 &&
-        nombresJugadores[0] !== '' &&
-        nombresJugadores[1] !== '' && (
-          <>
-            <Losses
-              nombresJugadores={nombresJugadores}
-              shipsCosts={shipsCosts}
-              cantidad={cantidad}
-              setCantidad={setCantidad}
-            />
-            <div className="flex flex-row gap-20">
-              <Plunder
+        {nombresJugadores.length > 0 &&
+          nombresJugadores[0] !== '' &&
+          nombresJugadores[1] !== '' && (
+            <>
+              <Losses
+                nombresJugadores={nombresJugadores}
+                shipsCosts={shipsCosts}
+                cantidad={cantidad}
+                setCantidad={setCantidad}
+              />
+              <div className="flex flex-row gap-20">
+                <Plunder
+                  nombresJugadores={nombresJugadores}
+                  recursosRobados={recursosRobados}
+                  setRecursosRobados={setRecursosRobados}
+                />
+                <Debris
+                  nombresJugadores={nombresJugadores}
+                  escombrosReciclados={escombrosReciclados}
+                  setEscombrosReciclados={setEscombrosReciclados}
+                />
+              </div>
+              <PartialProfit
                 nombresJugadores={nombresJugadores}
                 recursosRobados={recursosRobados}
-                setRecursosRobados={setRecursosRobados}
-              />
-              <Debris
-                nombresJugadores={nombresJugadores}
                 escombrosReciclados={escombrosReciclados}
-                setEscombrosReciclados={setEscombrosReciclados}
+                cantidad={cantidad}
+                shipsCosts={shipsCosts}
               />
-            </div>
-            <PartialProfit
-              nombresJugadores={nombresJugadores}
-              recursosRobados={recursosRobados}
-              escombrosReciclados={escombrosReciclados}
-              cantidad={cantidad}
-              shipsCosts={shipsCosts}
-            />
-            <FinalProfit
-              nombresJugadores={nombresJugadores}
-              recursosRobados={recursosRobados}
-              escombrosReciclados={escombrosReciclados}
-              cantidad={cantidad}
-              shipsCosts={shipsCosts}
-            />
-          </>
-        )}
-    </div>
+              <FinalProfit
+                nombresJugadores={nombresJugadores}
+                recursosRobados={recursosRobados}
+                escombrosReciclados={escombrosReciclados}
+                cantidad={cantidad}
+                shipsCosts={shipsCosts}
+              />
+            </>
+          )}
+      </div>
+    </ProtectedRoute>
   );
 };
 

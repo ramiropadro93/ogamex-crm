@@ -5,6 +5,7 @@ import parse, {
   Element,
   HTMLReactParserOptions,
 } from 'html-react-parser';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 // Función de transformación para modificar el HTML
 const transformHtml = (node: Element, index: number) => {
@@ -30,6 +31,7 @@ const BattleIncome: NextPage = () => {
   };
 
   return (
+    <ProtectedRoute>
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">
         Calculadora de Renta de Batalla
@@ -52,6 +54,7 @@ const BattleIncome: NextPage = () => {
         <div>{parsedData}</div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 
