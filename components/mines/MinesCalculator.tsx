@@ -1,218 +1,303 @@
+import { getBaseMineProduction } from '@/constants/Mines/GetBaseMineProduction';
+import {
+  CalculateCrawlerProduction,
+  GetAcademyExtraByLevel,
+  GetMinerClassExtra,
+  GetRankingExtraByTop,
+  GetResearchExtraByLevel,
+} from '@/helpers/GetExtrasByLevel';
+import { temperatureByPlanetSlot } from '@/constants/Mines/TemperatureByPlanetSlot';
 import React, { useState } from 'react';
 
-const MineCalculator: React.FC = () => {
+const MinesFuture: React.FC = () => {
   const [position, setPosition] = useState<number>(1);
   const [metalLevel, setMetalLevel] = useState<number>(1);
   const [crystalLevel, setCrystalLevel] = useState<number>(1);
   const [deuteriumLevel, setDeuteriumLevel] = useState<number>(1);
-  const [result, setResult] = useState<string>('');
+  const [mineralTechLevel, setMineralTechLevel] = useState<number>(0);
+  const [crystallizationTechLevel, setCrystallizationTechLevel] =
+    useState<number>(0);
+  const [fuelTechLevel, setFuelTechLevel] = useState<number>(0);
+  const [numberOfCrawlers, setNumberOfCrawlers] = useState<number>(0);
+  const [geologistLevel, setGeologistLevel] = useState<number>(0);
+  const [resourceExtractionLevel, setResourceExtractionLevel] =
+    useState<number>(0);
+  const [classType, setClassType] = useState<string>('Miner');
+  const [ranking, setRanking] = useState<number>(0);
+  const [resultMetal, setResultMetal] = useState<number>();
+  const [resultCrystal, setResultCrystal] = useState<number>();
+  const [resultDeuterium, setResultDeuterium] = useState<number>();
 
-  const METAL_TYPE = 'metal';
-  const CRYSTAL_TYPE = 'crystal';
-  const DEUTERIUM_TYPE = 'deuterium';
-
-  const productionMultiplierByMineType = {
-    [METAL_TYPE]: 36000,
-    [CRYSTAL_TYPE]: 18000,
-    [DEUTERIUM_TYPE]: 12000,
-  } as any;
-
-  const productionBonusesByPlanetSlot = {
-    1: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0.34, [DEUTERIUM_TYPE]: 0 },
-    2: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0.32, [DEUTERIUM_TYPE]: 0 },
-    3: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0.3, [DEUTERIUM_TYPE]: 0 },
-    4: { [METAL_TYPE]: 0.15, [CRYSTAL_TYPE]: 0.15, [DEUTERIUM_TYPE]: 0 },
-    5: { [METAL_TYPE]: 0.15, [CRYSTAL_TYPE]: 0.15, [DEUTERIUM_TYPE]: 0 },
-    6: { [METAL_TYPE]: 0.15, [CRYSTAL_TYPE]: 0.15, [DEUTERIUM_TYPE]: 0 },
-    7: { [METAL_TYPE]: 0.3, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0 },
-    8: { [METAL_TYPE]: 0.3, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0 },
-    9: { [METAL_TYPE]: 0.3, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0 },
-    10: { [METAL_TYPE]: 0.1, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.15 },
-    11: { [METAL_TYPE]: 0.1, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.15 },
-    12: { [METAL_TYPE]: 0.1, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.15 },
-    13: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.2 },
-    14: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.2 },
-    15: { [METAL_TYPE]: 0, [CRYSTAL_TYPE]: 0, [DEUTERIUM_TYPE]: 0.2 },
-  } as any;
-
-  const temperatureByPlanetSlot = {
-    1: 85,
-    2: 80,
-    3: 75,
-    4: 70,
-    5: 60,
-    6: 50,
-    7: 40,
-    8: 30,
-    9: 20,
-    10: 10,
-    11: 0,
-    12: -10,
-    13: -20,
-    14: -30,
-    15: -40,
-  } as any;
-
-  const calculate = () => {
-    const universeMultiplier = 1; // Define según sea necesario
-    const minTemperature = temperatureByPlanetSlot[position] - 40; // Rango estimado
-    const maxTemperature = temperatureByPlanetSlot[position];
-
-    const metalProduction = getBaseMineProduction(
-      METAL_TYPE,
-      metalLevel,
-      position,
-      universeMultiplier,
-      minTemperature,
-      maxTemperature
-    );
-    const crystalProduction = getBaseMineProduction(
-      CRYSTAL_TYPE,
-      crystalLevel,
-      position,
-      universeMultiplier,
-      minTemperature,
-      maxTemperature
-    );
-    const deuteriumProduction = getBaseMineProduction(
-      DEUTERIUM_TYPE,
-      deuteriumLevel,
-      position,
-      universeMultiplier,
-      minTemperature,
-      maxTemperature
-    );
-
-    setResult(`
-            Producción de Metal: ${metalProduction} \n
-            Producción de Cristal: ${crystalProduction} \n
-            Producción de Deuterio: ${deuteriumProduction}
-        `);
-  };
-
-  const getBaseMineProduction = (
-    mineType: string,
-    level: number,
-    planetSlotNumber: number,
-    universeMultiplier: number,
-    minimumTemperature: number,
-    maximumTemperature: number
+  const calculateTotalProduction = (
+    metalLevel: number,
+    crystalLevel: number,
+    deuteriumLevel: number,
+    mineralTechLevel: number,
+    crystallizationTechLevel: number,
+    fuelTechLevel: number,
+    numberOfCrawlers: number,
+    geologistLevel: number,
+    resourceExtractionLevel: number,
+    classType: string,
+    ranking: number
   ) => {
-    let baseProduction =
-      productionMultiplierByMineType[mineType] *
-      universeMultiplier *
-      level *
-      Math.pow(1.1, level) *
-      (1 + productionBonusesByPlanetSlot[planetSlotNumber][mineType]);
+    let baseProduction = {
+      metal: getBaseMineProduction(
+        'metal',
+        metalLevel,
+        position,
+        1200,
+        temperatureByPlanetSlot[position].min,
+        temperatureByPlanetSlot[position].max
+      ),
+      crystal: getBaseMineProduction(
+        'crystal',
+        crystalLevel,
+        position,
+        1200,
+        temperatureByPlanetSlot[position].min,
+        temperatureByPlanetSlot[position].max
+      ),
+      deuterium: getBaseMineProduction(
+        'deuterium',
+        deuteriumLevel,
+        position,
+        1200,
+        temperatureByPlanetSlot[position].min,
+        temperatureByPlanetSlot[position].max
+      ),
+    };
 
-    const minimumLevelForExtraProductionBoost =
-      mineType === DEUTERIUM_TYPE ? 46 : 50;
-    if (level > minimumLevelForExtraProductionBoost) {
-      baseProduction *= Math.pow(
-        1.05,
-        level - minimumLevelForExtraProductionBoost
+    let researchBonusMetal = GetResearchExtraByLevel(mineralTechLevel);
+    let researchBonusCrystal = GetResearchExtraByLevel(
+      crystallizationTechLevel
+    );
+    let researchBonusDeuterium = GetResearchExtraByLevel(fuelTechLevel);
+
+    let crawlerBonus = CalculateCrawlerProduction(numberOfCrawlers);
+
+    let geologistBonus = Math.min(geologistLevel, 20) * 0.05;
+
+    let academyBonus = GetAcademyExtraByLevel(resourceExtractionLevel);
+
+    let rankingBonus = GetRankingExtraByTop(ranking);
+
+    let totalProduction = {
+      metal:
+        baseProduction.metal +
+        baseProduction.metal * researchBonusMetal +
+        baseProduction.metal * geologistBonus +
+        baseProduction.metal * academyBonus +
+        baseProduction.metal * crawlerBonus +
+        baseProduction.metal * rankingBonus,
+      crystal:
+        baseProduction.crystal +
+        baseProduction.crystal * researchBonusCrystal +
+        baseProduction.crystal * geologistBonus +
+        baseProduction.crystal * academyBonus +
+        baseProduction.crystal * crawlerBonus +
+        baseProduction.crystal * rankingBonus,
+      deuterium:
+        baseProduction.deuterium +
+        baseProduction.deuterium * researchBonusDeuterium +
+        baseProduction.deuterium * geologistBonus +
+        baseProduction.deuterium * academyBonus +
+        baseProduction.deuterium * crawlerBonus +
+        baseProduction.deuterium * rankingBonus,
+    };
+
+    const partial = totalProduction;
+
+    if (classType === 'Miner') {
+      totalProduction.metal += GetMinerClassExtra(totalProduction.metal);
+      totalProduction.crystal += GetMinerClassExtra(totalProduction.crystal);
+      totalProduction.deuterium += GetMinerClassExtra(
+        totalProduction.deuterium
       );
     }
-    if (level > 120) {
-      baseProduction /= Math.pow(1.05, level - 120);
-    }
-    if (mineType === DEUTERIUM_TYPE) {
-      baseProduction *=
-        1.2 - (0.004 * (maximumTemperature + minimumTemperature)) / 2;
-    }
-    return Math.round(baseProduction);
+
+    setResultMetal(totalProduction.metal);
+    setResultCrystal(totalProduction.crystal);
+    setResultDeuterium(totalProduction.deuterium);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Calculadora de Minas
-        </h2>
-        <form
-          id="form-calculate"
-          onSubmit={(e) => {
-            e.preventDefault();
-            calculate();
-          }}
-        >
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Posición del planeta (del 1 al 15):
-            </label>
-            <input
-              type="number"
-              id="position"
-              value={position}
-              min="1"
-              max="15"
-              onChange={(e) => setPosition(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Nivel de mina de metal:
-            </label>
-            <input
-              type="number"
-              id="metal-level"
-              value={metalLevel}
-              min="1"
-              max="200"
-              onChange={(e) => setMetalLevel(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Nivel de mina de cristal:
-            </label>
-            <input
-              type="number"
-              id="crystal-level"
-              value={crystalLevel}
-              min="1"
-              max="200"
-              onChange={(e) => setCrystalLevel(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Nivel de sintetizador de deuterio:
-            </label>
-            <input
-              type="number"
-              id="deuterium-level"
-              value={deuteriumLevel}
-              min="1"
-              max="200"
-              onChange={(e) => setDeuteriumLevel(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+    <div className="p-4 max-w-lg mx-auto">
+      <form
+        className="space-y-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          calculateTotalProduction(
+            metalLevel,
+            crystalLevel,
+            deuteriumLevel,
+            mineralTechLevel,
+            crystallizationTechLevel,
+            fuelTechLevel,
+            numberOfCrawlers,
+            geologistLevel,
+            resourceExtractionLevel,
+            classType,
+            ranking
+          );
+        }}
+      >
+        <label className="block">
+          Posición del planeta (del 1 al 15):
+          <input
+            type="number"
+            value={position}
+            min="1"
+            max="15"
+            onChange={(e) => setPosition(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de mina de metal:
+          <input
+            type="number"
+            value={metalLevel}
+            min="1"
+            max="200"
+            onChange={(e) => setMetalLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de mina de cristal:
+          <input
+            type="number"
+            value={crystalLevel}
+            min="1"
+            max="200"
+            onChange={(e) => setCrystalLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de sintetizador de deuterio:
+          <input
+            type="number"
+            value={deuteriumLevel}
+            min="1"
+            max="200"
+            onChange={(e) => setDeuteriumLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de Tecnología Mineral:
+          <input
+            type="number"
+            value={mineralTechLevel}
+            min="0"
+            onChange={(e) => setMineralTechLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de Tecnología de Cristalización:
+          <input
+            type="number"
+            value={crystallizationTechLevel}
+            min="0"
+            onChange={(e) =>
+              setCrystallizationTechLevel(Number(e.target.value))
+            }
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de Tecnología de Combustible:
+          <input
+            type="number"
+            value={fuelTechLevel}
+            min="0"
+            onChange={(e) => setFuelTechLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Cantidad de taladros
+          <input
+            type="number"
+            value={numberOfCrawlers}
+            min="0"
+            onChange={(e) => setNumberOfCrawlers(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de Geólogo
+          <input
+            type="number"
+            value={geologistLevel}
+            min="0"
+            max="20"
+            onChange={(e) => setGeologistLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Nivel de academia de extracción de recursos
+          <input
+            type="number"
+            value={resourceExtractionLevel}
+            min="0"
+            onChange={(e) => setResourceExtractionLevel(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <label className="block">
+          Clase
+          <select
+            value={classType}
+            onChange={(e) => setClassType(e.target.value)}
+            className="mt-1 block w-full p-2 border rounded"
           >
-            Calcular
-          </button>
-        </form>
-
-        <div
-          id="div-result"
-          className="mt-6 text-center text-lg font-semibold text-gray-800"
+            <option value="Miner">Minero</option>
+            <option value="Commander">Comandante</option>
+            <option value="Discoverer">Explorador</option>
+          </select>
+        </label>
+        <label className="block">
+          Ranking
+          <input
+            type="number"
+            value={ranking}
+            min="0"
+            onChange={(e) => setRanking(Number(e.target.value))}
+            className="mt-1 block w-full p-2 border rounded"
+          />
+        </label>
+        <button
+          type="submit"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >
-          {result && <div>{result}</div>}
+          Calcular
+        </button>
+        <div
+          id="result"
+          className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
+        >
+          {Math.floor(resultMetal ?? 0).toLocaleString('es-ES')}
         </div>
-      </div>
+        <div
+          id="result"
+          className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
+        >
+          {Math.floor(resultCrystal ?? 0).toLocaleString('es-ES')}
+        </div>
+        <div
+          id="result"
+          className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
+        >
+          {Math.floor(resultDeuterium ?? 0).toLocaleString('es-ES')}
+        </div>
+      </form>
     </div>
   );
 };
 
-export default MineCalculator;
+export default MinesFuture;

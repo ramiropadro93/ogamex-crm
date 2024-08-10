@@ -28,24 +28,24 @@ const MinesFuture: React.FC = () => {
         nivelMetal,
         position,
         1000,
-        temperature,
-        temperature
+        temperature.min,
+        temperature.max
       );
       const crystalProduction = getBaseMineProduction(
         'crystal',
         nivelCristal,
         position,
         1000,
-        temperature,
-        temperature
+        temperature.min,
+        temperature.max
       );
       const deuteriumProduction = getBaseMineProduction(
         'deuterium',
         nivelDeuterio,
         position,
         1000,
-        temperature,
-        temperature
+        temperature.min,
+        temperature.max
       );
 
       const metalCost = calculateMetalMineCost(nivelMetal);
@@ -70,7 +70,6 @@ const MinesFuture: React.FC = () => {
       );
 
       if (metalAmortization === minimumAmortization) {
-        console.log('nivelMetal: ', nivelMetal);
         result.push('Metal ' + ++nivelMetal);
       }
       if (crystalAmortization === minimumAmortization) {
