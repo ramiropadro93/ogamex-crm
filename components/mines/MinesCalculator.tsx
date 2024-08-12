@@ -281,18 +281,11 @@ const MinesFuture: React.FC = () => {
           id="result"
           className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
         >
-          {Math.floor(resultMetal ?? 0).toLocaleString('es-ES')}
-        </div>
-        <div
-          id="result"
-          className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
-        >
-          {Math.floor(resultCrystal ?? 0).toLocaleString('es-ES')}
-        </div>
-        <div
-          id="result"
-          className="mt-4 p-4 border rounded bg-gray-0 shadow-lg"
-        >
+          Producción de metal:{' '}
+          {Math.floor(resultMetal ?? 0).toLocaleString('es-ES')} <br />
+          Producción de cristal:{' '}
+          {Math.floor(resultCrystal ?? 0).toLocaleString('es-ES')} {'\n'} <br />
+          Producción de deuterio:{' '}
           {Math.floor(resultDeuterium ?? 0).toLocaleString('es-ES')}
         </div>
       </form>

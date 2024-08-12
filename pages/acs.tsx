@@ -1,6 +1,4 @@
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import PlayerSelect from '@/components/acs/PlayerSelect';
 import Losses from '@/components/acs/Losses';
 import Plunder from '@/components/acs/Plunder';
